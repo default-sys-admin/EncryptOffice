@@ -10,7 +10,7 @@ namespace purify;
 
 internal class Program
 {
-    public const string Version = "0.7.0";
+    public const string Version = "0.7.1";
 
     private static readonly Logger log = LogManager.GetCurrentClassLogger();
 
@@ -24,7 +24,7 @@ internal class Program
             Console.WriteLine("[向导模式] purify guide");
             Console.WriteLine("[参数模式] purify --help");
             Console.WriteLine("=============================");
-            RunInCommandLineMode(new[] {"--help"});
+            RunInCommandLineMode(new[] { "--help" });
         }
         else if (args.Length == 1 && args[0] == "guide")
         {
@@ -87,6 +87,10 @@ internal class Program
     {
         try
         {
+            // convert to absolute fullpath
+            opts.SrcFile = Path.GetFullPath(opts.SrcFile);
+            opts.DstFile = Path.GetFullPath(opts.DstFile);
+
             if (!opts.Validate())
                 return;
 
@@ -106,6 +110,7 @@ internal class Program
                 return;
             }
 
+            log.Info($"处理文件: {opts.SrcFile}");
             p.ProcessFile(opts);
             p.Dispose();
         }
