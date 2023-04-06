@@ -1,0 +1,32 @@
+﻿<dx:DXWindow x:Class="EncryptOffice.UI.ReadmeWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             mc:Ignorable="d"
+             Icon="/images/question_icon.png"
+             Title="Readme" Height="360" Width="500"
+             WindowStyle="SingleBorderWindow"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterOwner">
+    <StackPanel Orientation="Vertical">
+        <TextBox IsReadOnly="True"
+                 Margin="20"
+                 xml:space="preserve"
+                 TextWrapping="Wrap">本工具用于批量删除Word、Excel、PowerPoint、PDF中的文档属性，自动升级到最新格式，并自动加密保存
+
+本机需要安装 Office，建议安装 Office2016 或更高版本
+
+目前日志系统已关闭，不写日志文件，以避免本地留痕。如果运行时出现错误，需要通过日志文件辅助排查，请手工编辑 nlog.config 文件，将
+&lt;!--  &lt;logger name="*" minlevel="Debug" writeTo="file" /&gt;  --&gt;
+改为
+&lt;logger name="*" minlevel="Debug" writeTo="file" /&gt;
+即取消注释，恢复写日志文件
+
+        </TextBox>
+        <TextBlock Margin="20" FontSize="24" Foreground="DarkRed">
+            使用前请做好文档备份，避免数据丢失！
+        </TextBlock>
+    </StackPanel>
+</dx:DXWindow>
