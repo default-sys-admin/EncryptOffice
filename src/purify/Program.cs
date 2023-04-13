@@ -10,7 +10,7 @@ namespace purify;
 
 internal class Program
 {
-    public const string Version = "0.7.1";
+    public const string Version = "0.7.2";
 
     private static readonly Logger log = LogManager.GetCurrentClassLogger();
 
@@ -89,7 +89,8 @@ internal class Program
         {
             // convert to absolute fullpath
             opts.SrcFile = Path.GetFullPath(opts.SrcFile);
-            opts.DstFile = Path.GetFullPath(opts.DstFile);
+            if (!opts.OverwriteInplace)
+                opts.DstFile = Path.GetFullPath(opts.DstFile);
 
             if (!opts.Validate())
                 return;
