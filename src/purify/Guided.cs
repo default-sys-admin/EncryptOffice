@@ -61,16 +61,17 @@ internal class Guided
             Console.WriteLine($"[输出目录] {batchOpts.OutputFolderNorm}");
             if (Directory.Exists(batchOpts.OutputFolder))
             {
-                batchOpts.OverwriteOutputFile = GetYesNoFromKeyboard("目标目录已存在，是否覆盖目录中的同名文件？(Y/N):");
+                // 输出目录已存在
+                // 有可能是上一次批处理执行了一半中断，需要继续执行
+                // 也有可能是选错目录了，需要重选
+                var r = GetYesNoFromKeyboard("目标目录已存在，确认？(Y/N):");
+                if (!r) continue;
 
-                // 确认覆盖，否则重新选择输出目录
-                if (batchOpts.OverwriteOutputFile)
-                    break;
+                // 确认是否覆盖已有的文件
+                batchOpts.OverwriteOutputFile = GetYesNoFromKeyboard("目标目录已存在，是否覆盖目录中的同名文件？(Y/N):");
             }
-            else
-            {
-                break;
-            }
+
+            break;
         }
 
         while (true)
